@@ -1,0 +1,21 @@
+spring:
+  devtools:
+    restart:
+      #可设置是否启用devtools热部署
+      enabled: true
+  #激活特定环境配置
+  profiles:
+    active: alpha,dev
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+logging:
+  level:
+    #Mapper所在的包
+    com.zk.dao: debug
+
+
+

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zk.dao.JobInfoDao">
+
+    <resultMap id="JobInfo" type="com.zk.domain.JobInfo">
+        <id column="id" property="id" />
+        <result column="company_name" property="companyName" />
+        <result column="company_addr" property="companyAddr" />
+        <result column="company_info" property="companyInfo" />
+        <result column="job_name" property="jobName" />
+        <result column="job_addr" property="jobAddr" />
+        <result column="job_info" property="jobInfo" />
+        <result column="salary_min" property="salaryMin" />
+        <result column="salary_max" property="salaryMax" />
+        <result column="url" property="url" />
+        <result column="time" property="time" />
+
+    </resultMap>
+    <sql id="jobInfoColumns">
+		a.id AS "id",
+		a.company_name AS "company_name",
+		a.company_addr AS "company_addr",
+		a.company_info AS "company_info",
+		a.job_name AS "job_name",
+		a.job_addr AS "job_addr",
+		a.job_info AS "job_info",
+		a.salary_min AS "salary_min",
+		a.salary_max AS "salary_max",
+		a.url AS "url",
+		a.time AS "time"
+
+	</sql>
+
+
+    <select id="findList"  resultMap="JobInfo">
+        SELECT
+        *
+        FROM job_info a
+
+        <where>
+
+            <!--<if test="companyName != null and companyName != ''">-->
+                <!--AND a.company_name = #{job.companyName}-->
+            <!--</if>-->
+            <!--<if test="companyAddr != null and companyAddr != ''">-->
+                <!--AND a.company_addr = #{job.companyAddr}-->
+            <!--</if>-->
+            <!--<if test="companyInfo != null and companyInfo != ''">-->
+                <!--AND a.company_info = #{job.companyInfo}-->
+            <!--</if>-->
+            <!--<if test="jobName != null and jobName != ''">-->
+                <!--AND a.job_name = #{job.jobName}-->
+            <!--</if>-->
+            <!--<if test="jobAddr != null and jobAddr != ''">-->
+                <!--AND a.job_addr =#{job.jobAddr}-->
+            <!--</if>-->
+            <!--<if test="jobInfo != null and jobInfo != ''">-->
+                <!--AND a.job_info = #{job.jobInfo}-->
+            <!--</if>-->
+            <!--<if test="salaryMin != null and salaryMin != ''">-->
+                <!--AND a.salary_min = #{job.salaryMin}-->
+            <!--</if>-->
+            <!--<if test="salaryMax != null and salaryMax != ''">-->
+                <!--AND a.salary_max = #{job.salaryMax}-->
+            <!--</if>-->
+            <!--<if test="url != null and url != ''">-->
+                <!--AND a.url = #{job.url}-->
+            <!--</if>-->
+            <!--<if test="time != null and time != ''">-->
+                <!--AND a.time = #{job.time}-->
+            <!--</if>-->
+
+        </where>
+        <choose>
+            <otherwise>
+                order by  a.time desc  Limit #{p.pageCount} ,#{p.limit}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAll"  resultMap="JobInfo">
+        SELECT
+        *
+        FROM job_info a
+
+        <where>
+
+            <if test="companyName != null and companyName != ''">
+            AND a.company_name = #{companyName}
+            </if>
+            <if test="companyAddr != null and companyAddr != ''">
+            AND a.company_addr = #{companyAddr}
+            </if>
+            <if test="companyInfo != null and companyInfo != ''">
+            AND a.company_info = #{companyInfo}
+            </if>
+            <if test="jobName != null and jobName != ''">
+            AND a.job_name = #{jobName}
+            </if>
+            <if test="jobAddr != null and jobAddr != ''">
+            AND a.job_addr =#{jobAddr}
+            </if>
+            <if test="jobInfo != null and jobInfo != ''">
+            AND a.job_info = #{jobInfo}
+            </if>
+            <if test="salaryMin != null and salaryMin != ''">
+            AND a.salary_min = #{salaryMin}
+            </if>
+            <if test="salaryMax != null and salaryMax != ''">
+            AND a.salary_max = #{job.salaryMax}
+            </if>
+            <if test="url != null and url != ''">
+            AND a.url = #{url}
+            </if>
+            <if test="time != null and time != ''">
+            AND a.time = #{time}
+            </if>
+
+        </where>
+
+    </select>
+</mapper>

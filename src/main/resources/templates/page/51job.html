@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>我的51简历投放中心</title>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="layui.js"></script>
+    <link rel="stylesheet" href="layui.css" media="all">
+    <script>
+        $(function(){
+            layui.use(['laypage', 'layer','table'], function() {
+                var laypage = layui.laypage
+                    , layer = layui.layer;
+                var table = layui.table;
+
+
+
+                //第一个实例
+                table.render({
+                    elem: '#demo'
+                    // ,height: 100
+                    ,url: '/all' //数据接口
+                    ,page: true//开启分页
+                    ,parseData: function(res) { //res 即为原始返回的数据
+                        return {
+                            "code": 0, //解析接口状态
+                            "msg": "", //解析提示文本
+                            "count":res.count,  //解析数据长度
+                            "data": res.data //解析数据列表
+                        };
+                    }
+                    , cols: [[ //表头
+                        {
+                            type: 'checkbox'
+                        }, {
+                            field: 'companyName',
+                            title: '公司名字',
+                            width:250
+                        }, {
+                            field: 'companyAddr',
+                            title: '公司地址',
+                            width:125
+                        }, {
+                            field: 'companyInfo',
+                            title: '公司详情'
+                        }, {
+                            field: 'jobName',
+                            title: '工作名字'
+                        }, {
+                            field: 'jobAddr',
+                            title: '工作地址'
+                        },  {
+                            field: 'jobInfo',
+                            title: '工作详情',
+                            width:350
+                        },  {
+                            field: 'salaryMin',
+                            title: '最低工资',
+                            width:120
+                        },  {
+                            field: 'salaryMax',
+                            title: '最高工资',
+                            width:120
+                        },  {
+                            field: 'url',
+                            title: '公司网址',
+                            templet:'#test'
+                        },  {
+                            field: 'time',
+                            title: '发布时间',
+                            width:120,
+                            sort:true
+                        }]]
+
+                });
+                laypage.render({
+                    elem: '#pageDemo' //分页容器的id
+                    ,count: 100 //总页数
+                    ,skin: '#1E9FFF' //自定义选中色值
+                    //,skip: true //开启跳页
+                    ,jump: function(obj, first){
+                        if(!first){
+                            layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+                        }
+                    }
+                });
+
+
+
+
+            });
+        })
+
+
+
+    </script>
+
+
+</head>
+
+<body class="">
+
+
+<table class="layui-hide" id="demo" lay-filter="test" style="height: 100%"></table>
+<script type="text/html" id="test">
+
+    <a href="{{d.url}}" class="layui-table-link" target="_blank">{{d.url}}</a>
+
+</script>
+</body>
+</html>
