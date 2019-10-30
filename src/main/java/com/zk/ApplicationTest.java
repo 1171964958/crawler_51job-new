@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-//@EnableScheduling//开启定时任务
+@EnableScheduling//开启定时任务
 @MapperScan(basePackages="com.zk.dao")
 @Configuration
 public class ApplicationTest {
